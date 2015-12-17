@@ -60,7 +60,7 @@ public class ClienteImpl implements InterfaceDAO<Cliente> {
             con = Conexion.getInstance().getConnection();
             stm = con.prepareStatement("update Cliente set estado=? where idCliente=?");
             stm.setBoolean(1, Boolean.FALSE);
-            stm.setInt(2, (int)id);
+            stm.setInt(2, (int) id);
             stm.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class ClienteImpl implements InterfaceDAO<Cliente> {
         Cliente cliente = null;
         try {
             con = Conexion.getInstance().getConnection();
-            stm = con.prepareStatement("select * from Cliente where idCliente = "+id);
+            stm = con.prepareStatement("select * from Cliente where idCliente = " + id);
             stm.setBoolean(1, Boolean.TRUE);
             stm.setInt(2, (int) id);
             rs = stm.executeQuery();
@@ -114,19 +114,21 @@ public class ClienteImpl implements InterfaceDAO<Cliente> {
     }
 
     @Override
-    public List<Cliente> findByQuery(Cliente t) {return null;};
+    public List<Cliente> findByQuery(Cliente t) {
+        return null;
+    };
     
-    public List<String> findClient(String dni){
+    public List<String> findClient(String dni) {
         List<String> datosCliente = new ArrayList<>();
-        try{
-        con = Conexion.getInstance().getConnection();
-        stm = con.prepareStatement("select cli.nombres, cli.apellidos from Cliente cli \n" +
-                                   "left join ClienteDocIdent docs\n" +
-                                   "on cli.idCliente = docs.idCliente\n" +
-                                   "where docs.numero = '"+dni+"';");
-        
-        }
-        catch(Exception e){
+        try {
+            con = Conexion.getInstance().getConnection();
+            stm = con.prepareStatement("select cli.nombres, cli.apellidos from Cliente cli left join ClienteDocIdent docs on cli.idCliente = docs.idCliente where docs.numero = '" + dni + "';");
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                datosCliente.add(rs.getString(1));
+                datosCliente.add(rs.getString(2));
+            }            
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return datosCliente;
