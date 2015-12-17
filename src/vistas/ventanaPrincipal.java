@@ -42,12 +42,14 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jpDatosEmpresa = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         jdpAreaTrabajo = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmConexion = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
         jmTareasOperador = new javax.swing.JMenu();
         jmiEmitirTicket = new javax.swing.JMenuItem();
         jmiCompletarTicket = new javax.swing.JMenuItem();
@@ -59,6 +61,8 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jmiConsultarComprobante = new javax.swing.JMenuItem();
         jmiGenDemandaServicio = new javax.swing.JMenuItem();
         jmiGenTurnos = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,6 +104,15 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         );
 
         jmConexion.setText("Conexión");
+
+        jmiSalir.setText("SALIR");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jmConexion.add(jmiSalir);
+
         jMenuBar1.add(jmConexion);
 
         jmTareasOperador.setText("Tareas");
@@ -287,9 +300,14 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiGenTurnosActionPerformed
 
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmiSalirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpAreaTrabajo;
     private javax.swing.JMenu jmConexion;
     private javax.swing.JMenu jmReportes;
@@ -303,6 +321,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiGenDemandaServicio;
     private javax.swing.JMenuItem jmiGenTurnos;
     private javax.swing.JMenuItem jmiNuevaReclamacion;
+    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JPanel jpDatosEmpresa;
     private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
