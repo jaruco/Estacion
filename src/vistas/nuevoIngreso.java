@@ -1,6 +1,7 @@
 package vistas;
 
 import java.util.List;
+import javax.swing.JTextField;
 import servicios.EstacionamientoImpl;
 import servicios.StartTime;
 import servicios.TipoVehiculoImpl;
@@ -31,6 +32,10 @@ public class nuevoIngreso extends javax.swing.JInternalFrame {
         for(int i = 0; i < est.allTypes().size(); i++)
             comboEstacionamientos.addItem(estacionamientos.get(i));
     }    
+
+    public JTextField getTxtHoraInicio() {
+        return txtHoraInicio;
+    }
     
      @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -271,7 +276,7 @@ jPanel1Layout.setHorizontalGroup(
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    public javax.swing.JTextField txtHoraInicio;
+    private javax.swing.JTextField txtHoraInicio;
     private javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }

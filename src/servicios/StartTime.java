@@ -21,7 +21,7 @@ public class StartTime extends Thread {
             hora = calendario.get(Calendar.HOUR_OF_DAY);
             minutos = calendario.get(Calendar.MINUTE);
             segundos = calendario.get(Calendar.SECOND);
-            ref.txtHoraInicio.setText(hora + ":" + minutos + ":" + segundos);
+            ref.getTxtHoraInicio().setText(hora + ":" + minutos + ":" + segundos);
         }
     }
 }
