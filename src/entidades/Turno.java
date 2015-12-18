@@ -15,11 +15,9 @@ public class Turno implements Serializable {
     
     private Integer idTurno;
     
-    private Date horaInicio;
+    private String horaInicio;
     
-    private Date horaFin;
-    
-    private String descripcion;
+    private String horaFin;
     
     private boolean estado;
     
@@ -32,9 +30,8 @@ public class Turno implements Serializable {
         this.idTurno = idTurno;
     }
 
-    public Turno(Integer idTurno, String descripcion, boolean estado) {
+    public Turno(Integer idTurno, boolean estado) {
         this.idTurno = idTurno;
-        this.descripcion = descripcion;
         this.estado = estado;
     }
 
@@ -46,29 +43,22 @@ public class Turno implements Serializable {
         this.idTurno = idTurno;
     }
 
-    public Date getHoraInicio() {
+    public String getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFin() {
+    public String getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Date horaFin) {
+    public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public boolean getEstado() {
         return estado;

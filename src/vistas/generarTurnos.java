@@ -5,8 +5,18 @@
  */
 package vistas;
 
+import entidades.TipoDocumento;
+import entidades.Turno;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import servicios.ClienteImpl;
+import servicios.InterfaceDAO;
+import servicios.TurnoImpl;
 
 /**
  *
@@ -15,13 +25,29 @@ import javax.swing.table.DefaultTableModel;
 public class generarTurnos extends javax.swing.JInternalFrame {
 
     int i = 0;
-
+    private InterfaceDAO<Turno> turn;
+    private TurnoImpl turnoImpl;
+    private Turno turno;
+    DefaultTableModel modelo;
     /**
      * Creates new form generarTurnos
      */
     public generarTurnos() {
         initComponents();
-      
+        turno = new Turno();
+        modelo = (DefaultTableModel) jtTurnos.getModel();
+        turnoImpl = new TurnoImpl();
+        List<Turno> turnos= (List<Turno>) turnoImpl.findAll();
+        Object[] fila = new Object[modelo.getColumnCount()];
+        for (int j = 0; j < turnos.size(); j++) {
+            fila[0]=turnos.get(j).getIdTurno();
+            fila[1]=turnos.get(j).getHoraInicio();
+            fila[2]=turnos.get(j).getHoraFin();
+            modelo.addRow(fila);
+        }
+        jtTurnos.setModel(modelo);
+        
+
     }
 
     /**
@@ -43,9 +69,6 @@ public class generarTurnos extends javax.swing.JInternalFrame {
         jtTurnos = new javax.swing.JTable();
         btnEliminarT = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnCancelarT = new javax.swing.JButton();
-        btnAplicarT = new javax.swing.JButton();
-        btnAceptarT = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -74,7 +97,6 @@ public class generarTurnos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtTurnos);
 
         btnEliminarT.setText("Eliminar");
-        btnEliminarT.setEnabled(false);
         btnEliminarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarTActionPerformed(evt);
@@ -124,27 +146,6 @@ public class generarTurnos extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Generar Turnos:");
 
-        btnCancelarT.setText("Cancelar");
-        btnCancelarT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarTActionPerformed(evt);
-            }
-        });
-
-        btnAplicarT.setText("Aplicar");
-        btnAplicarT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAplicarTActionPerformed(evt);
-            }
-        });
-
-        btnAceptarT.setText("Aceptar");
-        btnAceptarT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarTActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,14 +158,7 @@ public class generarTurnos extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAceptarT)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAplicarT)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelarT)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,11 +168,6 @@ public class generarTurnos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarT)
-                    .addComponent(btnAplicarT)
-                    .addComponent(btnAceptarT))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -187,8 +176,14 @@ public class generarTurnos extends javax.swing.JInternalFrame {
 
     private void btnAgregarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTurnoActionPerformed
 
+        turno.setIdTurno(i);
+        turno.setHoraInicio(txtHoraIT.getText());
+        turno.setHoraFin(txtHoraFT.getText());
+
+        turnoImpl.insert(turno);
+
         i++;
-        DefaultTableModel modelo = (DefaultTableModel) jtTurnos.getModel();
+        
 
         Object[] fila = new Object[6];
 
@@ -199,45 +194,36 @@ public class generarTurnos extends javax.swing.JInternalFrame {
         modelo.addRow(fila);
 
         jtTurnos.setModel(modelo);
+        txtHoraFT.setText("");
+        txtHoraFT.setText("");
+
 
     }//GEN-LAST:event_btnAgregarTurnoActionPerformed
 
     private void btnEliminarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jtTurnos.getModel();
+        
 
+//aca capturo el primer dato de la celda seleccionada 
+        String dato="";
+//        System.out.println("valor1: "+dato);
         int a = jtTurnos.getSelectedRow();
-
         if (a < 0) {
-            JOptionPane.showMessageDialog(null,"Debe seleccionar una fila de la tabla");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
         } else {
-            
+            dato = String.valueOf(modelo.getValueAt(jtTurnos.getSelectedRow(), 0));
             int confirmar = JOptionPane.showConfirmDialog(null,
                     "Esta seguro que desea Eliminar el registro? ");
             if (JOptionPane.OK_OPTION == confirmar) {
-                model.removeRow(a);
+                modelo.removeRow(a);
+                turnoImpl.eliminarTurno(Integer.parseInt(dato));
                 JOptionPane.showMessageDialog(null, "Turno Eliminado");
             }
         }
     }//GEN-LAST:event_btnEliminarTActionPerformed
 
-    private void btnAceptarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarTActionPerformed
-
-    private void btnAplicarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAplicarTActionPerformed
-
-    private void btnCancelarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarTActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptarT;
     private javax.swing.JButton btnAgregarTurno;
-    private javax.swing.JButton btnAplicarT;
-    private javax.swing.JButton btnCancelarT;
     private javax.swing.JButton btnEliminarT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
