@@ -1,5 +1,6 @@
 package vistas;
 
+import entidades.Usuario;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -8,9 +9,17 @@ import java.awt.Toolkit;
  * @author Jorge
  */
 public class ventanaPrincipal extends javax.swing.JFrame {
-
-    public ventanaPrincipal() {
+    
+    private static String usuario;
+    
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
+    }
+    
+    public ventanaPrincipal(String usuario) {
         initComponents();
+        this.usuario = usuario;
+        lblUsuario.setText(usuario);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension ventana = this.getSize();
         this.setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
@@ -33,7 +42,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     }
 
     public static void main(String[] args) {
-        ventanaPrincipal vp = new ventanaPrincipal();
+        ventanaPrincipal vp = new ventanaPrincipal(usuario);
         vp.setVisible(true);
 
     }
@@ -46,7 +55,9 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jpDatosEmpresa = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jdpAreaTrabajo = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmConexion = new javax.swing.JMenu();
         jmiSalir = new javax.swing.JMenuItem();
@@ -70,38 +81,46 @@ public class ventanaPrincipal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(102, 102, 255));
         jLabel1.setText("ESTACIONAMIENTO \"SAN JOSÉ\"");
 
-        lblUsuario.setText("hola");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Usuario:");
 
         javax.swing.GroupLayout jpDatosEmpresaLayout = new javax.swing.GroupLayout(jpDatosEmpresa);
         jpDatosEmpresa.setLayout(jpDatosEmpresaLayout);
         jpDatosEmpresaLayout.setHorizontalGroup(
             jpDatosEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpDatosEmpresaLayout.createSequentialGroup()
-                .addGap(317, 317, 317)
-                .addComponent(jLabel1)
-                .addGap(137, 137, 137)
+                .addGap(234, 234, 234)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpDatosEmpresaLayout.setVerticalGroup(
             jpDatosEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpDatosEmpresaLayout.createSequentialGroup()
                 .addGroup(jpDatosEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estacionamiento.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jdpAreaTrabajoLayout = new javax.swing.GroupLayout(jdpAreaTrabajo);
         jdpAreaTrabajo.setLayout(jdpAreaTrabajoLayout);
         jdpAreaTrabajoLayout.setHorizontalGroup(
             jdpAreaTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jdpAreaTrabajoLayout.setVerticalGroup(
             jdpAreaTrabajoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        jdpAreaTrabajo.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jmConexion.setText("Conexión");
 
@@ -306,6 +325,8 @@ public class ventanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpAreaTrabajo;

@@ -111,7 +111,9 @@ public class inicioSesion extends javax.swing.JFrame {
                 if (correcto == 1) {
                     JOptionPane.showMessageDialog(null, "Bienvenido al Sistema", "Mensaje del Sistema", JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
-                    new ventanaPrincipal().setVisible(true);
+//                    new ventanaPrincipal().setVisible(true);
+                    ventanaPrincipal ventana = new ventanaPrincipal(txtUsuario.getText());
+                    ventana.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Datos Ingresados no son correctos, intente otra vez", "Mensaje del Sistema", JOptionPane.ERROR_MESSAGE);
                     intentos++;

@@ -1,4 +1,3 @@
-
 package entidades;
 
 import java.io.Serializable;
@@ -9,26 +8,28 @@ import java.util.Date;
  *
  * @author Nishme
  */
-
 public class ServicioEstac implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     private Integer idServEstac;
-    
+
     private Date horaIni;
-    
+
     private Date horaFin;
-   
+
     private Date fechaIni;
-    
+
     private Date fechaFin;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    
+
     private BigDecimal total;
-    
+
     private Servicio servicio;
-    
+
     private Estacionamiento estacionamiento;
+
+    private Double tarifaTipoVehiculo;
 
     public ServicioEstac() {
     }
@@ -101,6 +102,14 @@ public class ServicioEstac implements Serializable {
         this.estacionamiento = estacionamiento;
     }
 
+    public Double getTarifaTipoVehiculo() {
+        return tarifaTipoVehiculo;
+    }
+
+    public void setTarifaTipoVehiculo(Double tarifaTipoVehiculo) {
+        this.tarifaTipoVehiculo = tarifaTipoVehiculo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -125,6 +134,5 @@ public class ServicioEstac implements Serializable {
     public String toString() {
         return "entidades.ServicioEstac[ idServEstac=" + idServEstac + " ]";
     }
-    
-}
 
+}

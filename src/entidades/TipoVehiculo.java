@@ -20,7 +20,7 @@ public class TipoVehiculo implements Serializable {
     
     private Tarifa tarifa;
    
-    private List<Estacionamiento> estacionamientoList;
+    private List<Vehiculo> vehiculoList;
 
     public TipoVehiculo() {
     }
@@ -61,13 +61,15 @@ public class TipoVehiculo implements Serializable {
         this.tarifa = tarifa;
     }
 
-    public List<Estacionamiento> getEstacionamientoList() {
-        return estacionamientoList;
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
     }
 
-    public void setEstacionamientoList(List<Estacionamiento> estacionamientoList) {
-        this.estacionamientoList = estacionamientoList;
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
     }
+
+  
 
     @Override
     public int hashCode() {

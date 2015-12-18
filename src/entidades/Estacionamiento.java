@@ -20,7 +20,7 @@ public class Estacionamiento implements Serializable {
     
     private List<ServicioEstac> servicioEstacList;
     
-    private TipoVehiculo tipoVehiculo;
+    private Vehiculo vehiculo;
 
     public Estacionamiento() {
     }
@@ -61,13 +61,15 @@ public class Estacionamiento implements Serializable {
         this.servicioEstacList = servicioEstacList;
     }
 
-    public TipoVehiculo getTipoVehiculo() {
-        return tipoVehiculo;
+    public Vehiculo getVehiculo() {
+        return vehiculo;
     }
 
-    public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
-        this.tipoVehiculo = tipoVehiculo;
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
+
+   
 
     @Override
     public int hashCode() {

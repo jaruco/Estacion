@@ -73,8 +73,31 @@ public class ClienteImpl implements InterfaceDAO<Cliente> {
         Cliente cliente = null;
         try {
             con = Conexion.getInstance().getConnection();
-            stm = con.prepareStatement("select * from Cliente");
+            stm = con.prepareStatement("select * from Cliente where estado = ? ");
             stm.setBoolean(1, true);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt(1));
+                cliente.setNombres(rs.getString(2));
+                cliente.setApellidos(rs.getString(3));
+                cliente.setTipoPersona(rs.getString(4));
+                clientes.add(cliente);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
+     public List<Cliente> findByName(Cliente c) {
+        List<Cliente> clientes = new ArrayList<>();
+        Cliente cliente = null;
+        try {
+            con = Conexion.getInstance().getConnection();
+            stm = con.prepareStatement("select * from Cliente where estado = ? and nombres like ? and apellidos like ? ");
+            stm.setBoolean(1, true);
+            stm.setString(2, "%"+ c.getNombres() + "%");
+            stm.setString(3, "%"+ c.getApellidos() + "%");
             rs = stm.executeQuery();
             while (rs.next()) {
                 cliente = new Cliente();
@@ -127,6 +150,27 @@ public class ClienteImpl implements InterfaceDAO<Cliente> {
             if (rs.next()) {
                 datosCliente.add(rs.getString(1));
                 datosCliente.add(rs.getString(2));
+            }            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return datosCliente;
+    }
+    
+     public List<Cliente> findCliente(String nroDoc) {
+        List<Cliente> datosCliente = new ArrayList<>();
+        Cliente cliente = null;
+        try {
+            con = Conexion.getInstance().getConnection();
+            stm = con.prepareStatement("select cli.idcliente, cli.nombres, cli.apellidos, cli.tipoPersona from Cliente cli left join ClienteDocIdent docs on cli.idCliente = docs.idCliente where docs.numero = '" + nroDoc + "';");
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt(1));
+                cliente.setNombres(rs.getString(2));
+                cliente.setApellidos(rs.getString(3));
+                cliente.setTipoPersona(rs.getString(4));
+                datosCliente.add(cliente);
             }            
         } catch (Exception e) {
             e.printStackTrace();
